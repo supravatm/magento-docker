@@ -1,0 +1,38 @@
+
+# Custom GraphQL schema for SMG_CustomGraphQl module
+#
+# Following Magento coding standards:
+# - @doc for documentation
+# - @resolver to bind PHP resolver
+# - @cache for cache identity tags
+# - @deprecated to guide migration when needed
+
+type Query {
+  customEntity(id: Int!): CustomEntity
+    @resolver(class: "SMG\\CustomGraphQl\\Model\\Resolver\\CustomEntity")
+    @cache(cacheIdentity: "custom_entity")
+    @doc(description: "Returns a custom entity by its ID")
+}
+
+type Mutation {
+  createCustomEntity(input: CustomEntityInput!): CustomEntityOutput
+    @resolver(class: "SMG\\CustomGraphQl\\Model\\Resolver\\Mutation\\CreateCustomEntity")
+    @doc(description: "Creates a new custom entity and returns its data")
+}
+
+type CustomEntity {
+  id: Int! @doc(description: "Unique identifier for the entity")
+  name: String! @doc(description: "Entity name")
+  status: String! @doc(description: "Entity status: active/inactive")
+}
+
+
+input CustomEntityInput {
+  name: String! @doc(description: "Name of the new entity")
+  status: String = "active" @doc(description: "Initial status (default active)")
+}
+
+type CustomEntityOutput {
+  entity: CustomEntity! @doc(description: "The newly created entity")
+  success: Boolean! @doc(description: "Whether the mutation was successful")
+}
