@@ -1,5 +1,28 @@
 # Skip all files
+**/*.*
 *
 
-# Except specific directories
-!.gitignore
+# But keep src directory
+!/src/
+
+# Keep src/app directory
+!/src/app/
+# Keep src/app/code directory and everything inside it
+!/src/app/code/
+!/src/app/code/**
+
+# Keep src/app/code directory and everything inside it
+!/src/app/design/
+!/src/app/design/**
+
+# Typical ignores for Magento 2 / PHP projects
+/vendor/
+/pub/static/*
+/pub/media/*
+/generated/*
+/var/*
+/node_modules/
+*.log
+*.cache
+.idea/
+*.DS_Store
